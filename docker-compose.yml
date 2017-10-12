@@ -3,7 +3,7 @@ services:
         mysql:
                 build: ./mysql
                 environment:
-                        - MYSQL_ROOT_PASSWORD=psw
+                        - MYSQL_ROOT_PASSWORD=password
                         - MYSQL_DATABASE=database
                 ports:
                         - "8083:3306"
