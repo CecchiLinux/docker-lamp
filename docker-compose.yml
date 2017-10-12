@@ -1,0 +1,30 @@
+version: '2'
+services:
+        mysql:
+                build: ./mysql
+                environment:
+                        - MYSQL_ROOT_PASSWORD=psw
+                        - MYSQL_DATABASE=database
+                ports:
+                        - "8083:3306"
+                volumes:
+                        - ./db:/var/lib/mysql
+        php:
+               build: ./php
+               ports:
+                       - "80:80"
+               volumes:
+                       - ./html:/var/www/html
+               depends_on:
+                       - mysql
+
+        phpmyadmin:
+               image: phpmyadmin/phpmyadmin
+               environment:
+                      - PMA_ARBITRARY=1
+                      - PMA_HOST=mysql
+               restart: always
+               ports:
+                       - "8081:80"
+               depends_on:
+                       - mysql
